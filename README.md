@@ -20,3 +20,20 @@
 - Micro Game 1
 - ...
 - Micro game N
+## Asset List:
+### UI/Transition/Menus
+- "THREAD IT!" image
+- Transition Thread image
+- UI Life Thread Spool
+### Lightbulb Game
+- Lightbulb [frame 1 turn, frame 2 turn, frame 3 light up]
+- Foreground
+- Background
+### Needle Game
+- Thread
+- Needle
+- Background
+### Spider Game
+- Spider [frame 1 leg movement, frame 2 leg movement]
+- Silk
+- Fly [frame 1 wing flutter, frame 2 wing flutter]
