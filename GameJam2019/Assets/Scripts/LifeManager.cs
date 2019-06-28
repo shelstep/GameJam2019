@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class LifeManager : MonoBehaviour
 {
-    public static LifeManager instance = null;              //Static instance of LifeManager which allows it to be accessed by any other script.
-    private int lifeCount = 0;
+    public static LifeManager instance;              //Static instance of LifeManager which allows it to be accessed by any other script.
+    private static int lifeCount = 0;
     public const int MAX_LIVES = 3;
 
     //Awake is always called before any Start functions
@@ -43,12 +43,12 @@ public class LifeManager : MonoBehaviour
        //Draw thread spools based on number of lives
     }
 
-    public void resetLives()
+    public static void resetLives()
     {
         lifeCount = MAX_LIVES;
     }
 
-    public int loseLife()
+    public static int loseLife()
     {
         if (lifeCount > 0)
             lifeCount--;

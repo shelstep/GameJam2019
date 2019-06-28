@@ -9,11 +9,11 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
 
-    public static GameManager instance = null;              //Static instance of GameManager which allows it to be accessed by any other script.
-    private int difficulty = 1;                                  //Current game difficulty
-    private int score = 0;                                  //Current score
-    private int highScore = 0;                                  //High score (should this persist between play sessions?)
-    public LifeManager lifeManager;
+    public static GameManager instance;              //Static instance of GameManager which allows it to be accessed by any other script.
+    private static int difficulty = 1;                                  //Current game difficulty
+    private static int score = 0;                                  //Current score
+    private static int highScore = 0;                                  //High score (should this persist between play sessions?)
+    //public static LifeManager lifeManager;
 
     //Awake is always called before any Start functions
     void Awake()
@@ -41,7 +41,6 @@ public class GameManager : MonoBehaviour
     void InitGame()
     {
         SceneManager.LoadScene("MainMenu");
-        StartGame();
 
     }
 
@@ -54,18 +53,20 @@ public class GameManager : MonoBehaviour
     }
 
     //Called by the Main Menu to start the game
-    void StartGame()
+    public static void StartGame()
     {
         //Create LifeManager
-        Instantiate(lifeManager, new Vector3(0, 0, 0), Quaternion.identity);
+        //Instantiate(lifeManager, new Vector3(0, 0, 0), Quaternion.identity);
         //set difficulty to 1
-        this.difficulty = 1;
+        difficulty = 1;
+        LifeManager.resetLives();
         //create 108 thread objects for the scene transitions. 54 on each side, outside the bounds of the level. Don't Destroy on Load
         //Have threads engulf the screen
         //start microgame
+        StartMicroGame();
     }
 
-    void StartMicroGame()
+    public static void StartMicroGame()
     {
         SceneManager.LoadScene("DebugGame");
         //Randomly select a game
@@ -73,31 +74,33 @@ public class GameManager : MonoBehaviour
         //threads move off screen
     }
 
-    void WonMicroGame()
+    public static void WonMicroGame()
     {
         //Threads engulf screen
         //increase score
         score++;
-        //StartMicroGame()
+        StartMicroGame();
     }
 
-    void LostMicroGame()
+    public static void LostMicroGame()
     {
         //Threads engulf screen
         //removes life
-        int currentLives = lifeManager.loseLife();
+        int currentLives = LifeManager.loseLife();
         //if lives = 0, then GameOver()
         if (currentLives == 0)
             GameOver();
         //otherwise start another microgame
-        StartMicroGame();
+        else
+            StartMicroGame();
     }
 
-    void GameOver()
+    public static void GameOver()
     {
         //Threads engulf screen
         //unload current scene
         //load GameOver scene
+        SceneManager.LoadScene("GameOver");
         //Check for high score
     }
 
