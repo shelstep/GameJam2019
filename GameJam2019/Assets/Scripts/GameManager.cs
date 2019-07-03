@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     private static int difficulty = 1;                                  //Current game difficulty
     private static int score = 0;                                  //Current score
     private static int highScore = 0;                                  //High score (should this persist between play sessions?)
+    private static LifeManager lifeManager; 
     //public static LifeManager lifeManager;
 
     //Awake is always called before any Start functions
@@ -35,6 +36,8 @@ public class GameManager : MonoBehaviour
 
         //Call the InitGame function to initialize the first level 
         InitGame();
+
+        lifeManager = GameObject.FindObjectOfType<LifeManager>();
     }
 
     //Initializes the game
@@ -59,7 +62,7 @@ public class GameManager : MonoBehaviour
         //Instantiate(lifeManager, new Vector3(0, 0, 0), Quaternion.identity);
         //set difficulty to 1
         difficulty = 1;
-        LifeManager.resetLives();
+        lifeManager.ResetLives();
         //create 108 thread objects for the scene transitions. 54 on each side, outside the bounds of the level. Don't Destroy on Load
         //Have threads engulf the screen
         //start microgame
@@ -86,7 +89,7 @@ public class GameManager : MonoBehaviour
     {
         //Threads engulf screen
         //removes life
-        int currentLives = LifeManager.loseLife();
+        int currentLives = lifeManager.LoseLife();
         //if lives = 0, then GameOver()
         if (currentLives == 0)
             GameOver();
