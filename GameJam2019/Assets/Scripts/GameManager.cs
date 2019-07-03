@@ -68,7 +68,7 @@ public class GameManager : MonoBehaviour
 
     public static void StartMicroGame()
     {
-        SceneManager.LoadScene("DebugGame");
+        SceneManager.LoadScene("LightbulbGame");
         //Randomly select a game
         //unload current scene, load randomly selected game
         //threads move off screen
