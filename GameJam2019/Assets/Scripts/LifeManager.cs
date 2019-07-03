@@ -7,6 +7,9 @@ public class LifeManager : MonoBehaviour
     public static LifeManager instance;              //Static instance of LifeManager which allows it to be accessed by any other script.
     private static int lifeCount = 0;
     public const int MAX_LIVES = 3;
+    private static GameObject[] lives = new GameObject[MAX_LIVES];
+    public GameObject life;
+
 
     //Awake is always called before any Start functions
     void Awake()
@@ -26,31 +29,36 @@ public class LifeManager : MonoBehaviour
         //Sets this to not be destroyed when reloading scene
         DontDestroyOnLoad(gameObject);
 
-        //set lives to 3
-        lifeCount = MAX_LIVES;
-
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-       //Draw thread spools based on number of lives
+  
     }
 
-    public static void resetLives()
+
+    public void ResetLives()
     {
         lifeCount = MAX_LIVES;
+        for (int i = MAX_LIVES; i >= 1; i--)
+        {
+            GameObject temp = Instantiate(life, new Vector3(((MAX_LIVES - i) * (float)-1.50 - 4), (float)-3.75, 1), Quaternion.identity);
+            DontDestroyOnLoad(temp);
+            lives[i - 1] = temp;
+        }
     }
 
-    public static int loseLife()
+    public int LoseLife()
     {
         if (lifeCount > 0)
+            Destroy(lives[lifeCount-1]);
             lifeCount--;
         return lifeCount;    
     }
