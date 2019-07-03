@@ -18,6 +18,6 @@ EditorBuildSettings:
     path: Assets/Scenes/GameOver.unity
     guid: 14009d66122e3524dbc677f39ab9af2b
   - enabled: 1
-    path: Assets/Scenes/LighbulbGame.unity
+    path: Assets/Scenes/LightbulbGame.unity
     guid: e1c60e38dde2c5a4e9875fbd8842e468
   m_configObjects: {}
